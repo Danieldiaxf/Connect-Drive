@@ -1,7 +1,7 @@
-package br.com.connectdrive.entity;
+package br.com.connectdrive.model.entity;
 
-import br.com.connectdrive.enums.CategoriaCNH;
-import br.com.connectdrive.enums.StatusVerificacao;
+import br.com.connectdrive.model.enums.CategoriaCNH;
+import br.com.connectdrive.model.enums.StatusVerificacao;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

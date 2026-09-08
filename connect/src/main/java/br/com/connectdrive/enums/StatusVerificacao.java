@@ -1,4 +1,4 @@
-package br.com.connectdrive.enums;
+package br.com.connectdrive.model.enums;
 
 public enum StatusVerificacao {
     PENDENTE,
