@@ -19,6 +19,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -81,4 +82,7 @@ public abstract class Usuario {
         return Period.between(dataNasc, LocalDate.now()).getYears();
     }
 
+    public boolean autenticar(String senha) {
+        return Objects.equals(this.senha, senha);
+    }
 }
