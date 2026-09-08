@@ -7,10 +7,10 @@ import br.com.connectdrive.entity.Instrutor;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import br.com.connectdrive.model.enums.StatusVerificacao;
-import br.com.connectdrive.model.enums.CategoriaCNH;
+import br.com.connectdrive.enums.StatusVerificacao;
+import br.com.connectdrive.enums.CategoriaCNH;
 import org.springframework.stereotype.Repository;
-import br.com.connectdrive.model.enums.Sexo;
+import br.com.connectdrive.enums.Sexo;
 
 
 @Repository

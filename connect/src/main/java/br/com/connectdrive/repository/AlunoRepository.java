@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import br.com.connectdrive.model.enums.CategoriaPretendido;
+import br.com.connectdrive.enums.CategoriaPretendido;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
