@@ -1,4 +1,4 @@
-package br.com.connectdrive.entity;
+package br.com.connectdrive.model.entity;
 
 import br.com.connectdrive.model.enums.CategoriaPretendido;
 import jakarta.persistence.Column;

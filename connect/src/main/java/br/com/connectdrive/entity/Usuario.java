@@ -1,4 +1,4 @@
-package br.com.connectdrive.entity;
+package br.com.connectdrive.model.entity;
 
 import br.com.connectdrive.model.enums.Sexo;
 import jakarta.persistence.Column;
@@ -19,7 +19,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.UUID;
+import java.util.Objects;
 
 @Entity
 @Table(name = "usuarios")
@@ -30,8 +30,8 @@ import java.util.UUID;
 public abstract class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, length = 120)
     private String nome;
@@ -42,7 +42,7 @@ public abstract class Usuario {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNasc;
 
-    @Enumerated(EnumType.STRING )
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private Sexo sexo;
 
@@ -81,4 +81,7 @@ public abstract class Usuario {
         return Period.between(dataNasc, LocalDate.now()).getYears();
     }
 
+    public boolean autenticar(String senha) {
+        return Objects.equals(this.senha, senha);
+    }
 }
