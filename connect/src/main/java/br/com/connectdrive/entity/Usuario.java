@@ -1,6 +1,6 @@
 package br.com.connectdrive.entity;
 
-import br.com.connectdrive.model.enums.Sexo;
+import br.com.connectdrive.enums.Sexo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

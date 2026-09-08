@@ -1,4 +1,4 @@
-package br.com.connectdrive.model.enums;
+package br.com.connectdrive.enums;
 
 public enum Sexo {
     MASCULINO,

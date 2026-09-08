@@ -2,7 +2,7 @@ package br.com.connectdrive.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.connectdrive.model.entity.Instrutor;
+import br.com.connectdrive.entity.Instrutor;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,11 +15,11 @@ import br.com.connectdrive.model.enums.Sexo;
 
 @Repository
 public interface InstrutorRepository extends JpaRepository<Instrutor, Long> {
-    // Validação unica
+
     Optional<Instrutor> findByNumCnh(String numCnh);
     boolean existsByNumCnh(String numCnh);
 
-    // Filtros de Busca
+
     List<Instrutor> findByNotaMedia(double notaMedia);
     List<Instrutor> findByPrecoHora(BigDecimal precoHora);
     List<Instrutor> findByCidadeContainingIgnoreCase(String cidade);
