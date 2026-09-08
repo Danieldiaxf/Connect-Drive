@@ -19,6 +19,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.UUID;
 
 @Entity
 @Table(name = "usuarios")
@@ -30,7 +31,7 @@ public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false, length = 120)
     private String nome;
