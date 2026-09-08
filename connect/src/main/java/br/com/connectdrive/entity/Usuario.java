@@ -1,6 +1,6 @@
-package br.com.connectdrive.model.entity;
+package br.com.connectdrive.entity;
 
-import br.com.connectdrive.model.enums.Sexo;
+import br.com.connectdrive.enums.Sexo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "usuarios")
@@ -30,8 +31,8 @@ import java.util.Objects;
 public abstract class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(nullable = false, length = 120)
     private String nome;
@@ -42,7 +43,7 @@ public abstract class Usuario {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNasc;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING )
     @Column(nullable = false, length = 10)
     private Sexo sexo;
 
