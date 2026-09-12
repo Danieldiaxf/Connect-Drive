@@ -6,10 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 import br.com.connectdrive.enums.CategoriaPretendido;
 
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, Long> {
+public interface AlunoRepository extends JpaRepository<Aluno, UUID> {
 
     Optional<Aluno> findByMatricula (String matricula);
     boolean existsByMatricula(String matricula);

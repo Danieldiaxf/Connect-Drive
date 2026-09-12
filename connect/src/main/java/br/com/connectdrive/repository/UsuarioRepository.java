@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
 
     Optional<Usuario> findByCpf (String cpf);
     Optional<Usuario> findByEmail (String email);
@@ -16,6 +16,4 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     // Validação Cpf e Email
     boolean existsByCpf(String cpf);
     boolean existsByEmail(String email);
-
-    Optional<Usuario> findById( UUID id );
 }
