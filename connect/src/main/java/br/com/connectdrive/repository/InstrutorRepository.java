@@ -23,7 +23,7 @@ public interface InstrutorRepository extends JpaRepository<Instrutor, UUID> {
 
 
     List<Instrutor> findByNotaMedia(double notaMedia);
-    List<Instrutor> findByPrecoHora(BigDecimal precoHora);
+    List<Instrutor> findByPrecoHoraBetween(BigDecimal precoIni, BigDecimal precoFim);
     List<Instrutor> findByCidadeContainingIgnoreCase(String cidade);
     List<Instrutor> findByCarroContainingIgnoreCase(String carro);
     List<Instrutor> findByNomeContainingIgnoreCase(String nome);

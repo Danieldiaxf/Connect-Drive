@@ -30,7 +30,8 @@ public class AlunoController {
     }
 
     @GetMapping("/categoria/{categoria}")
-    public List<Aluno> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoriaPretendido ) {
-        return alunoRepository.findByCategoriaPretendida( categoriaPretendido );
+    public List<Aluno> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoria ) {
+        return alunoRepository.findByCategoriaPretendida( categoria );
     }
 }
+    
