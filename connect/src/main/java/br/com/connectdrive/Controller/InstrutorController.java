@@ -23,19 +23,19 @@ public class InstrutorController {
         instrutorRepository.save( instrutor );
     }
 
-    @GetMapping
-    public Instrutor findByNumCnh( String cnh ) {
+    @GetMapping("/cnh/{cnh}")
+    public Instrutor findByNumCnh( @PathVariable String cnh ) {
         return instrutorRepository.findByNumCnh( cnh )
                 .orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Instrutor não encontrado para CNH inserida!" ) );
     }
 
-    @GetMapping
-    public List<Instrutor> findBySexo( Sexo sexo ) {
+    @GetMapping("/sexo{sexo}")
+    public List<Instrutor> findBySexo( @PathVariable Sexo sexo ) {
         return instrutorRepository.findBySexo( sexo );
     }
 
-    @GetMapping
-    public List<Instrutor> findByNotaMedia( double nota ) {
+    @GetMapping("/nota{nota}")
+    public List<Instrutor> findByNotaMedia( @PathVariable Double nota ) {
         return instrutorRepository.findByNotaMedia( nota );
     }
 
