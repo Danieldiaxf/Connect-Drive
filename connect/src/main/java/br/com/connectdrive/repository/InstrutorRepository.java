@@ -2,7 +2,7 @@ package br.com.connectdrive.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.connectdrive.entity.Instrutor;
+import br.com.connectdrive.entities.Instrutor;
 
 import java.math.BigDecimal;
 import java.util.List;

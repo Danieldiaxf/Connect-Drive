@@ -1,6 +1,6 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Aluno;
+import br.com.connectdrive.entities.Aluno;
 import br.com.connectdrive.enums.CategoriaPretendido;
 import br.com.connectdrive.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;

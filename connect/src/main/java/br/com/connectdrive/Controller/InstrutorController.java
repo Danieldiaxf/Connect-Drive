@@ -1,11 +1,10 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Instrutor;
+import br.com.connectdrive.entities.Instrutor;
 import br.com.connectdrive.enums.Sexo;
 import br.com.connectdrive.repository.InstrutorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

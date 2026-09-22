@@ -1,7 +1,7 @@
 package br.com.connectdrive.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import br.com.connectdrive.entity.Usuario;
+import br.com.connectdrive.entities.Usuario;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
