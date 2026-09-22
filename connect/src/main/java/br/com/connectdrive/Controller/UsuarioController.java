@@ -1,6 +1,7 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Usuario;
+import br.com.connectdrive.entities.Usuario;
+import br.com.connectdrive.mapper.UsuarioMapper;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class UsuarioController {
 
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
 
     @GetMapping("/{id}")
     public Usuario findById( @PathVariable UUID id ) {
