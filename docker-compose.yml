@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: connect-drive-postgres
+    environment:
+      POSTGRES_DB: connectdrive
+      POSTGRES_USER: connectdrive
+      POSTGRES_PASSWORD: connectdrive
+    ports:
+      - "5432:5432"
+    volumes:
+      - connect-drive-postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U connectdrive -d connectdrive"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  app:
+    build:
+      context: ./connect
+      dockerfile: Dockerfile
+    container_name: connect-drive-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/connectdrive
+      SPRING_DATASOURCE_USERNAME: connectdrive
+      SPRING_DATASOURCE_PASSWORD: connectdrive
+      SPRING_DATASOURCE_DRIVER: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_H2_CONSOLE_ENABLED: "false"
+    ports:
+      - "8080:8080"
+
+
+volumes:
+  connect-drive-postgres-data:
