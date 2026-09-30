@@ -19,8 +19,8 @@ services:
 
   app:
     build:
-      context: ./connect
-      dockerfile: Dockerfile
+      context: ../connect
+      dockerfile: ../connect/Dockerfile
     container_name: connect-drive-api
     depends_on:
       postgres:
