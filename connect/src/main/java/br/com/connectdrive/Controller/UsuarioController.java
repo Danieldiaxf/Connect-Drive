@@ -1,9 +1,11 @@
 package br.com.connectdrive.Controller;
 
+import br.com.connectdrive.Services.UsuarioService;
 import br.com.connectdrive.entity.Usuario;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,6 +17,7 @@ import java.util.UUID;
 public class UsuarioController {
 
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     @GetMapping("/{id}")
     public Usuario findById( @PathVariable UUID id ) {
@@ -38,7 +41,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuarioById( @PathVariable UUID id ) {
-        usuarioRepository.deleteById( id );
+    public ResponseEntity<Void> deleteUsuarioById(@PathVariable UUID id ) throws Exception {
+        usuarioService.deleteById( id );
+        return ResponseEntity.noContent( ).build( );
     }
 }
