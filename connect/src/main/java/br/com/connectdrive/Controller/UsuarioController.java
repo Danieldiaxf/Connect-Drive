@@ -33,10 +33,11 @@ public class UsuarioController {
     }
 
     @GetMapping("/Email/{email}")
-    public Usuario findByEmail( @PathVariable String email ) {
-        return usuarioRepository.findByEmail( email )
-                .orElseThrow( () ->
-                        new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para Email inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<Usuario> findByEmail( @PathVariable String email ) {
+
+        return usuarioService.findByEmail( email );
+
     }
 
     @DeleteMapping("/{id}")

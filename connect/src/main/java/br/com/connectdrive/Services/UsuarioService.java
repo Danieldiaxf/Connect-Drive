@@ -42,6 +42,18 @@ public class UsuarioService {
 
     }
 
+    public Optional<Usuario> findByEmail( String email ) {
+
+        boolean existe = usuarioRepository.existsByEmail( email );
+
+        if ( !existe ) {
+            throw new RuntimeException( "Usuario com o Email fornecido não foi encontrado!" );
+        }
+
+        return usuarioRepository.findByEmail( email );
+
+    }
+
     @Transactional
     public void deleteById( UUID id ) {
 
