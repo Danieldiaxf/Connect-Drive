@@ -17,27 +17,24 @@ import java.util.UUID;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private final UsuarioRepository usuarioRepository;
     private final UsuarioService usuarioService;
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Optional<Usuario> findById(@PathVariable UUID id ) {
+    public Usuario findById(@PathVariable UUID id ) {
         return usuarioService.findById( id );
     }
 
     @GetMapping("/CPF/{cpf}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Optional<Usuario> findByCpf( @PathVariable String cpf ) {
+    public Usuario findByCpf( @PathVariable String cpf ) {
         return usuarioService.findBycpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Optional<Usuario> findByEmail( @PathVariable String email ) {
-
+    public Usuario findByEmail( @PathVariable String email ) {
         return usuarioService.findByEmail( email );
-
     }
 
     @DeleteMapping("/{id}")
