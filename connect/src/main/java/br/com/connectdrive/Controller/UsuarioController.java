@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -20,10 +21,9 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping("/{id}")
-    public Usuario findById( @PathVariable UUID id ) {
-        return usuarioRepository.findById( id )
-                .orElseThrow( () ->
-                        new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para id inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<Usuario> findById(@PathVariable UUID id ) {
+        return usuarioService.findById( id );
     }
 
     @GetMapping("/CPF/{cpf}")
@@ -41,8 +41,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuarioById(@PathVariable UUID id ) throws Exception {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUsuarioById(@PathVariable UUID id ) {
         usuarioService.deleteById( id );
-        return ResponseEntity.noContent( ).build( );
     }
 }
