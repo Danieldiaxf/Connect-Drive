@@ -30,6 +30,18 @@ public class UsuarioService {
 
     }
 
+    public Optional<Usuario> findBycpf( String cpf ) {
+
+        boolean existe = usuarioRepository.existsByCpf( cpf );
+
+        if( !existe ) {
+            throw new RuntimeException( "Usuario com o CPF fornecido não foi encontrado!" );
+        }
+
+        return usuarioRepository.findByCpf( cpf );
+
+    }
+
     @Transactional
     public void deleteById( UUID id ) {
 

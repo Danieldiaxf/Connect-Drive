@@ -27,10 +27,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/CPF/{cpf}")
-    public Usuario findByCpf( @PathVariable String cpf ) {
-        return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( () ->
-                    new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para CPF inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<Usuario> findByCpf( @PathVariable String cpf ) {
+        return usuarioService.findBycpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
