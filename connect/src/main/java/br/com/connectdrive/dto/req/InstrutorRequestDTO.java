@@ -1,4 +1,8 @@
 package br.com.connectdrive.dto.req;
 
-public record InstrutorRequestDTO() {
+import br.com.connectdrive.enums.Sexo;
+
+public record InstrutorRequestDTO(
+        String cnh, Sexo sexo, double notaMedia
+) {
 }
