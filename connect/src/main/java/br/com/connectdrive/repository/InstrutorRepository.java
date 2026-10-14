@@ -7,7 +7,6 @@ import br.com.connectdrive.entity.Instrutor;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import br.com.connectdrive.enums.StatusVerificacao;
 import br.com.connectdrive.enums.CategoriaCNH;
@@ -16,7 +15,7 @@ import br.com.connectdrive.enums.Sexo;
 
 
 @Repository
-public interface InstrutorRepository extends JpaRepository<Instrutor, UUID> {
+public interface InstrutorRepository extends JpaRepository<Instrutor, Long> {
 
     Optional<Instrutor> findByNumCnh(String numCnh);
     boolean existsByNumCnh(String numCnh);
