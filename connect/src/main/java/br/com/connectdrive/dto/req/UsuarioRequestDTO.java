@@ -1,5 +1,10 @@
 package br.com.connectdrive.dto.req;
 
-public record UsuarioDto( Long id ) {
 
+import java.time.LocalDate;
+
+public record UsuarioRequestDTO(
+        Long id, String nome, String cpf,
+        LocalDate dataNasc, String email
+) {
 }
