@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "usuarios")
@@ -30,8 +29,8 @@ import java.util.UUID;
 public abstract class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private Long id;
 
     @Column(nullable = false, length = 120)
     private String nome;

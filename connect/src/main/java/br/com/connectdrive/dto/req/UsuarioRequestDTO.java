@@ -1,7 +1,5 @@
 package br.com.connectdrive.dto.req;
 
-import java.util.UUID;
-
-public record UsuarioRequestDTO() {
+public record UsuarioDto( Long id ) {
 
 }
