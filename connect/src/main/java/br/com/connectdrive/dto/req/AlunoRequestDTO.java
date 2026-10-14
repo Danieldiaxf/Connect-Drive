@@ -1,4 +1,8 @@
 package br.com.connectdrive.dto.req;
 
-public record AlunoRequestDTO() {
+import br.com.connectdrive.enums.CategoriaPretendido;
+
+public record AlunoRequestDTO(
+        String matricula, CategoriaPretendido categoriaPretendido
+) {
 }
