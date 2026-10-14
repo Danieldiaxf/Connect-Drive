@@ -6,14 +6,13 @@ import br.com.connectdrive.entities.Usuario;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper( componentModel = "spring" )
 public interface UsuarioMapper {
 
-    Usuario toUsuarioEnity ( UsuarioRequestDTO usuarioRequestDTO );
-
-    Usuario toUsuarioEntity( UsuarioResponseDTO usuarioResponseDTO );
-
     List<Usuario> toListUsuario( List<UsuarioRequestDTO> usuariosRequestDTOS );
+
+    Optional<Usuario> toUsuarioOptional( Optional<Usuario> usuarioEntity );
 
 }
