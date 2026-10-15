@@ -18,21 +18,21 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public Usuario findById( @PathVariable Long id ) {
         return usuarioRepository.findById( id )
-                .orElseThrow( () ->
+                .orElseThrow( ( ) ->
                         new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para id inserido" ) );
     }
 
     @GetMapping("/CPF/{cpf}")
     public Usuario findByCpf( @PathVariable String cpf ) {
         return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( () ->
+                .orElseThrow( ( ) ->
                     new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para CPF inserido" ) );
     }
 
     @GetMapping("/Email/{email}")
     public Usuario findByEmail( @PathVariable String email ) {
         return usuarioRepository.findByEmail( email )
-                .orElseThrow( () ->
+                .orElseThrow( ( ) ->
                         new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para Email inserido" ) );
     }
 

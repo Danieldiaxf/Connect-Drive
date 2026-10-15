@@ -25,7 +25,7 @@ public class InstrutorController {
     @GetMapping("/cnh/{cnh}")
     public Instrutor findByNumCnh( @PathVariable String cnh ) {
         return instrutorRepository.findByNumCnh( cnh )
-                .orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Instrutor não encontrado para CNH inserida!" ) );
+                .orElseThrow( ( ) -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Instrutor não encontrado para CNH inserida!" ) );
     }
 
     @GetMapping("/sexo/{sexo}")
