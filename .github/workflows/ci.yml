@@ -5,6 +5,11 @@ on:
     branches:
       - main
       - development
+  push:
+    branches:
+      - main
+      - development
+
 
 # Cancela execuções antigas do mesmo PR quando um novo push chega,
 # evitando gastar minutos de CI com um código já desatualizado.
