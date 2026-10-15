@@ -1,13 +1,12 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Usuario;
+import br.com.connectdrive.entities.Usuario;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,7 +16,7 @@ public class UsuarioController {
     private final UsuarioRepository usuarioRepository;
 
     @GetMapping("/{id}")
-    public Usuario findById( @PathVariable UUID id ) {
+    public Usuario findById( @PathVariable Long id ) {
         return usuarioRepository.findById( id )
                 .orElseThrow( () ->
                         new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para id inserido" ) );
@@ -38,7 +37,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuarioById( @PathVariable UUID id ) {
+    public void deleteUsuarioById( @PathVariable Long id ) {
         usuarioRepository.deleteById( id );
     }
 }
