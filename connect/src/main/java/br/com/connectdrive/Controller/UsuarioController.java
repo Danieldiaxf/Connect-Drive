@@ -1,6 +1,6 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Usuario;
+import br.com.connectdrive.entities.Usuario;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
