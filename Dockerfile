@@ -19,6 +19,9 @@ COPY connect/src src
 RUN ./mvnw clean package -DskipTests
 
 
+
+
+
 FROM eclipse-temurin:26-jre
 
 
