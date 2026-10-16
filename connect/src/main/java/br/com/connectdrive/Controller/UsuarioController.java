@@ -17,7 +17,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Usuario findById(@PathVariable UUID id ) {
+    public Usuario findById(@PathVariable Long id ) {
         return usuarioService.findById( id );
     }
 
@@ -35,7 +35,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUsuarioById(@PathVariable UUID id ) {
+    public void deleteUsuarioById(@PathVariable Long id ) {
         usuarioService.deleteById( id );
     }
 }
