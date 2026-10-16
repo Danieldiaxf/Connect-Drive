@@ -1,13 +1,12 @@
 package br.com.connectdrive.Services;
 
-import br.com.connectdrive.entity.Usuario;
+import br.com.connectdrive.entities.Usuario;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
