@@ -1,13 +1,10 @@
 package br.com.connectdrive.Controller;
 
 import br.com.connectdrive.Services.UsuarioService;
-import br.com.connectdrive.entity.Usuario;
-import br.com.connectdrive.repository.UsuarioRepository;
+import br.com.connectdrive.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
