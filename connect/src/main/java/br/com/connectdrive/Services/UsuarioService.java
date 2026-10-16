@@ -15,12 +15,12 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public Usuario findById(UUID id) {
+    public Usuario findById( Long id ) {
         return usuarioRepository.findById( id )
                 .orElseThrow( ( ) -> new RuntimeException( "Usuario com o ID fornecido não foi encontrado!" ) );
     }
 
-    public Usuario findBycpf( String cpf ) {
+    public Usuario findBycpf(String cpf ) {
         return usuarioRepository.findByCpf( cpf )
                 .orElseThrow( ( ) -> new RuntimeException( "Usuario com o CPF fornecido não foi encontrado!" ) );
     }
@@ -32,7 +32,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public void deleteById( UUID id ) {
+    public void deleteById( Long id ) {
 
         boolean existe = usuarioRepository.existsById( id );
 
