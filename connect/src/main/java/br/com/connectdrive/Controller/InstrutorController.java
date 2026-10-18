@@ -17,11 +17,10 @@ import java.util.List;
 public class InstrutorController {
 
     private final InstrutorService service;
-    private final InstrutorRepository instrutorRepository;
 
     @PostMapping
     public void salvarInstrutor( @RequestBody Instrutor instrutor ){
-        instrutorRepository.save( instrutor );
+        service.salvarInstrutor( instrutor );
     }
 
     @GetMapping("/cnh/{cnh}")
@@ -31,12 +30,12 @@ public class InstrutorController {
 
     @GetMapping("/sexo/{sexo}")
     public List<Instrutor> findBySexo( @PathVariable Sexo sexo ) {
-        return instrutorRepository.findBySexo( sexo );
+        return service.findBySexo( sexo );
     }
 
     @GetMapping("/nota/{nota}")
     public List<Instrutor> findByNotaMedia( @PathVariable Double nota ) {
-        return instrutorRepository.findByNotaMedia( nota );
+        return service.findByNotaMedia( nota );
     }
 
 }
