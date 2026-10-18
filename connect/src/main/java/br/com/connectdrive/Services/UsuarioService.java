@@ -21,6 +21,7 @@ public class UsuarioService {
     }
 
     public Usuario findBycpf(String cpf ) {
+    public Usuario findByCpf( String cpf ) {
         return usuarioRepository.findByCpf( cpf )
                 .orElseThrow( ( ) -> new RuntimeException( "Usuario com o CPF fornecido não foi encontrado!" ) );
     }

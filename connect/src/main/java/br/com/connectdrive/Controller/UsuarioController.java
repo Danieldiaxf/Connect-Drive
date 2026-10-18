@@ -24,7 +24,7 @@ public class UsuarioController {
     @GetMapping("/CPF/{cpf}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Usuario findByCpf( @PathVariable String cpf ) {
-        return usuarioService.findBycpf( cpf );
+        return usuarioService.findByCpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
