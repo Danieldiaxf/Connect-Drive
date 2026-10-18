@@ -1,12 +1,11 @@
 package br.com.connectdrive.Controller;
 
+import br.com.connectdrive.Services.AlunoService;
 import br.com.connectdrive.entities.Aluno;
 import br.com.connectdrive.enums.CategoriaPretendido;
-import br.com.connectdrive.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,22 +15,24 @@ import java.util.List;
 public class AlunoController {
 
 
-    private final AlunoRepository alunoRepository;
+    private final AlunoService alunoService;
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void criarAluno( @RequestBody Aluno aluno ) {
-        alunoRepository.save( aluno );
+        alunoService.criarAluno( aluno );
     }
 
     @GetMapping("/matricula/{matricula}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public Aluno findByMatricula( @PathVariable String matricula ) {
-        return alunoRepository.findByMatricula( matricula )
-                .orElseThrow( ( ) -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Aluno não encontrado para matrícula inserida!" ) );
+        return alunoService.findByMatricula( matricula );
     }
 
     @GetMapping("/categoria/{categoria}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Aluno> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoria ) {
-        return alunoRepository.findByCategoriaPretendida( categoria );
+        return alunoService.findByCategoriaPretendida( categoria );
     }
 }
     

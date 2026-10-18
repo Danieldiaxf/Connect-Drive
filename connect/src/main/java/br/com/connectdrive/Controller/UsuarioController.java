@@ -1,43 +1,41 @@
 package br.com.connectdrive.Controller;
 
+import br.com.connectdrive.Services.UsuarioService;
 import br.com.connectdrive.entities.Usuario;
-import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     @GetMapping("/{id}")
-    public Usuario findById( @PathVariable Long id ) {
-        return usuarioRepository.findById( id )
-                .orElseThrow( ( ) ->
-                        new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para id inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Usuario findById(@PathVariable Long id ) {
+        return usuarioService.findById( id );
     }
 
     @GetMapping("/CPF/{cpf}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public Usuario findByCpf( @PathVariable String cpf ) {
-        return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( ( ) ->
-                    new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para CPF inserido" ) );
+        return usuarioService.findByCpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public Usuario findByEmail( @PathVariable String email ) {
-        return usuarioRepository.findByEmail( email )
-                .orElseThrow( ( ) ->
-                        new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para Email inserido" ) );
+        return usuarioService.findByEmail( email );
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuarioById( @PathVariable Long id ) {
-        usuarioRepository.deleteById( id );
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUsuarioById(@PathVariable Long id ) {
+        usuarioService.deleteById( id );
     }
 }
