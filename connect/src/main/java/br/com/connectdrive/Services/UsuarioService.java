@@ -1,7 +1,6 @@
 package br.com.connectdrive.Services;
 
 import br.com.connectdrive.dto.resp.UsuarioResponseDTO;
-import br.com.connectdrive.entities.Usuario;
 import br.com.connectdrive.mapper.UsuarioMapper;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +23,14 @@ public class UsuarioService {
 
         log.info( "Requisicao findById solicitada as {} para o id {}", LocalTime.now( ), id );
 
-        return mapper.toResponse( usuarioRepository.findById( id ) );
+        return mapper.toOptionalDTO( usuarioRepository.findById( id ) );
     }
 
     public Optional<UsuarioResponseDTO> findByCpf( String cpf ) {
 
         log.info( "Requisicao findByCpf solicitada as {} para o usuario {}", LocalTime.now( ), cpf );
 
-        return mapper.toResponse( usuarioRepository.findByCpf( cpf ) );
+        return mapper.toOptionalDTO( usuarioRepository.findByCpf( cpf ) );
 
     }
 
@@ -39,7 +38,7 @@ public class UsuarioService {
 
         log.info( "Requisicao findByEmail solicitada as {} para o usuario {}", LocalTime.now( ), email );
 
-        return mapper.toResponse( usuarioRepository.findByEmail( email ) );
+        return mapper.toOptionalDTO( usuarioRepository.findByEmail( email ) );
     }
 
     @Transactional
