@@ -16,17 +16,24 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Usuario findById( Long id ) {
+
+        log.info( "Requisicao findById solicitada as {} para o id {}", LocalTime.now( ), id );
+
         return usuarioRepository.findById( id )
                 .orElseThrow( ( ) -> new RuntimeException( "Usuario com o ID fornecido não foi encontrado!" ) );
     }
 
-    public Usuario findBycpf(String cpf ) {
     public Usuario findByCpf( String cpf ) {
+
+        log.info( "Requisicao findByCpf solicitada as {} para o usuario {}", LocalTime.now( ), cpf );
+
         return usuarioRepository.findByCpf( cpf )
                 .orElseThrow( ( ) -> new RuntimeException( "Usuario com o CPF fornecido não foi encontrado!" ) );
     }
 
     public Usuario findByEmail( String email ) {
+
+        log.info( "Requisicao findByEmail solicitada as {} para o usuario {}", LocalTime.now( ), email );
 
         return usuarioRepository.findByEmail( email )
                 .orElseThrow( ( ) -> new RuntimeException( "Usuario com o Email fornecido não foi encontrado!" ) );
@@ -34,6 +41,8 @@ public class UsuarioService {
 
     @Transactional
     public void deleteById( Long id ) {
+
+        log.info( "Requisicao deleteById solicitada as {} para o id {}", LocalTime.now( ), id );
 
         boolean existe = usuarioRepository.existsById( id );
 
@@ -43,6 +52,6 @@ public class UsuarioService {
 
         usuarioRepository.deleteById( id );
 
-        log.info("Usuário com id {} deletado do sistema com sucesso!", id);
+        log.info( "Usuário com id {} deletado do sistema com sucesso!", id );
     }
 }
