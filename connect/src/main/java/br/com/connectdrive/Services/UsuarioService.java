@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalTime;
 
 
 @Slf4j
@@ -20,7 +21,7 @@ public class UsuarioService {
         log.info( "Requisicao findById solicitada as {} para o id {}", LocalTime.now( ), id );
 
         return usuarioRepository.findById( id )
-                .orElseThrow( ( ) -> new RuntimeException( "Usuario com o ID fornecido não foi encontrado!" ) );
+                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o ID fornecido não encontrado!" ) );
     }
 
     public Usuario findByCpf( String cpf ) {
@@ -28,7 +29,7 @@ public class UsuarioService {
         log.info( "Requisicao findByCpf solicitada as {} para o usuario {}", LocalTime.now( ), cpf );
 
         return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( ( ) -> new RuntimeException( "Usuario com o CPF fornecido não foi encontrado!" ) );
+                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o CPF fornecido não encontrado!" ) );
     }
 
     public Usuario findByEmail( String email ) {
@@ -36,7 +37,7 @@ public class UsuarioService {
         log.info( "Requisicao findByEmail solicitada as {} para o usuario {}", LocalTime.now( ), email );
 
         return usuarioRepository.findByEmail( email )
-                .orElseThrow( ( ) -> new RuntimeException( "Usuario com o Email fornecido não foi encontrado!" ) );
+                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o Email fornecido não encontrado!" ) );
     }
 
     @Transactional
@@ -47,7 +48,7 @@ public class UsuarioService {
         boolean existe = usuarioRepository.existsById( id );
 
         if ( !existe ) {
-            throw new RuntimeException( "Usuário com o ID fornecido não foi encontrado!" );
+            throw new IllegalArgumentException( "Usuário com o ID fornecido não encontrado!" );
         }
 
         usuarioRepository.deleteById( id );
