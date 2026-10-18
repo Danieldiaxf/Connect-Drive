@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 import java.util.Optional;
 
-@Mapper( componentModel = "string" )
+@Mapper( componentModel = "spring" )
 public interface AlunoMapper {
 
     List<AlunoResponseDTO> toListAluno( List<Aluno> usuariosRequestDTOS );
