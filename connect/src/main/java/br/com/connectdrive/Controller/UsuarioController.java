@@ -25,13 +25,13 @@ public class UsuarioController {
 
     @GetMapping("/CPF/{cpf}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Usuario findByCpf( @PathVariable String cpf ) {
+    public Optional<UsuarioResponseDTO> findByCpf( @PathVariable String cpf ) {
         return usuarioService.findByCpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Usuario findByEmail( @PathVariable String email ) {
+    public Optional<UsuarioResponseDTO> findByEmail( @PathVariable String email ) {
         return usuarioService.findByEmail( email );
     }
 

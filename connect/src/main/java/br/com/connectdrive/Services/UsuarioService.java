@@ -27,20 +27,19 @@ public class UsuarioService {
         return mapper.toResponse( usuarioRepository.findById( id ) );
     }
 
-    public Usuario findByCpf( String cpf ) {
+    public Optional<UsuarioResponseDTO> findByCpf( String cpf ) {
 
         log.info( "Requisicao findByCpf solicitada as {} para o usuario {}", LocalTime.now( ), cpf );
 
-        return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o CPF fornecido não encontrado!" ) );
+        return mapper.toResponse( usuarioRepository.findByCpf( cpf ) );
+
     }
 
-    public Usuario findByEmail( String email ) {
+    public Optional<UsuarioResponseDTO> findByEmail( String email ) {
 
         log.info( "Requisicao findByEmail solicitada as {} para o usuario {}", LocalTime.now( ), email );
 
-        return usuarioRepository.findByEmail( email )
-                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o Email fornecido não encontrado!" ) );
+        return mapper.toResponse( usuarioRepository.findByEmail( email ) );
     }
 
     @Transactional
