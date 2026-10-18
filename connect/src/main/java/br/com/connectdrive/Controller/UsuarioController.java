@@ -1,12 +1,12 @@
 package br.com.connectdrive.Controller;
 
 import br.com.connectdrive.Services.UsuarioService;
-import br.com.connectdrive.entities.Usuario;
+import br.com.connectdrive.dto.resp.UsuarioResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,19 +17,19 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Usuario findById(@PathVariable Long id ) {
+    public Optional<UsuarioResponseDTO> findById( @PathVariable Long id ) {
         return usuarioService.findById( id );
     }
 
     @GetMapping("/CPF/{cpf}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Usuario findByCpf( @PathVariable String cpf ) {
+    public Optional<UsuarioResponseDTO> findByCpf( @PathVariable String cpf ) {
         return usuarioService.findByCpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Usuario findByEmail( @PathVariable String email ) {
+    public Optional<UsuarioResponseDTO> findByEmail( @PathVariable String email ) {
         return usuarioService.findByEmail( email );
     }
 

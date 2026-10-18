@@ -1,13 +1,15 @@
 package br.com.connectdrive.Controller;
 
 import br.com.connectdrive.Services.AlunoService;
-import br.com.connectdrive.entities.Aluno;
+import br.com.connectdrive.dto.req.AlunoRequestDTO;
+import br.com.connectdrive.dto.resp.AlunoResponseDTO;
 import br.com.connectdrive.enums.CategoriaPretendido;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/aluno")
@@ -19,19 +21,19 @@ public class AlunoController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void criarAluno( @RequestBody Aluno aluno ) {
-        alunoService.criarAluno( aluno );
+    public void criarAluno( @RequestBody AlunoRequestDTO alunoDTO ) {
+        alunoService.criarAluno( alunoDTO );
     }
 
     @GetMapping("/matricula/{matricula}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Aluno findByMatricula( @PathVariable String matricula ) {
+    public Optional<AlunoResponseDTO> findByMatricula(@PathVariable String matricula ) {
         return alunoService.findByMatricula( matricula );
     }
 
     @GetMapping("/categoria/{categoria}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Aluno> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoria ) {
+    public List<AlunoResponseDTO> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoria ) {
         return alunoService.findByCategoriaPretendida( categoria );
     }
 }

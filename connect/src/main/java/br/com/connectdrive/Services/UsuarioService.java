@@ -1,12 +1,14 @@
 package br.com.connectdrive.Services;
 
-import br.com.connectdrive.entities.Usuario;
+import br.com.connectdrive.dto.resp.UsuarioResponseDTO;
+import br.com.connectdrive.mapper.UsuarioMapper;
 import br.com.connectdrive.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalTime;
+import java.util.Optional;
 
 
 @Slf4j
@@ -15,29 +17,28 @@ import java.time.LocalTime;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper mapper;
 
-    public Usuario findById( Long id ) {
+    public Optional<UsuarioResponseDTO> findById( Long id ) {
 
         log.info( "Requisicao findById solicitada as {} para o id {}", LocalTime.now( ), id );
 
-        return usuarioRepository.findById( id )
-                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o ID fornecido não encontrado!" ) );
+        return mapper.toOptionalDTO( usuarioRepository.findById( id ) );
     }
 
-    public Usuario findByCpf( String cpf ) {
+    public Optional<UsuarioResponseDTO> findByCpf( String cpf ) {
 
         log.info( "Requisicao findByCpf solicitada as {} para o usuario {}", LocalTime.now( ), cpf );
 
-        return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o CPF fornecido não encontrado!" ) );
+        return mapper.toOptionalDTO( usuarioRepository.findByCpf( cpf ) );
+
     }
 
-    public Usuario findByEmail( String email ) {
+    public Optional<UsuarioResponseDTO> findByEmail( String email ) {
 
         log.info( "Requisicao findByEmail solicitada as {} para o usuario {}", LocalTime.now( ), email );
 
-        return usuarioRepository.findByEmail( email )
-                .orElseThrow( ( ) -> new IllegalArgumentException( "Usuario com o Email fornecido não encontrado!" ) );
+        return mapper.toOptionalDTO( usuarioRepository.findByEmail( email ) );
     }
 
     @Transactional

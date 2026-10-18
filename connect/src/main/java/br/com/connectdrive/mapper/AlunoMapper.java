@@ -1,19 +1,23 @@
 package br.com.connectdrive.mapper;
 
 import br.com.connectdrive.dto.req.AlunoRequestDTO;
-import br.com.connectdrive.dto.req.UsuarioRequestDTO;
 import br.com.connectdrive.dto.resp.AlunoResponseDTO;
 import br.com.connectdrive.entities.Aluno;
-import br.com.connectdrive.entities.Usuario;
 import org.mapstruct.Mapper;
 
 import java.util.List;
 import java.util.Optional;
 
-@Mapper( componentModel = "string" )
+@Mapper( componentModel = "spring" )
 public interface AlunoMapper {
 
-    List<UsuarioRequestDTO> toListUsuario( List<Usuario> usuariosRequestDTOS );
+    List<AlunoResponseDTO> toListAluno( List<Aluno> usuariosRequestDTOS );
 
-    Optional<AlunoResponseDTO> toUsuarioOptional( Optional<Aluno> usuarioEntity );
+    AlunoResponseDTO toDTO( Aluno Aluno );
+
+    Aluno toEntity( AlunoRequestDTO dto );
+
+    default Optional<AlunoResponseDTO> toOptionalDTO( Optional<Aluno> alunoOptional ) {
+        return alunoOptional.map( this::toDTO );
+    }
 }

@@ -1,7 +1,10 @@
 package br.com.connectdrive.Services;
 
+import br.com.connectdrive.dto.req.AlunoRequestDTO;
+import br.com.connectdrive.dto.resp.AlunoResponseDTO;
 import br.com.connectdrive.entities.Aluno;
 import br.com.connectdrive.enums.CategoriaPretendido;
+import br.com.connectdrive.mapper.AlunoMapper;
 import br.com.connectdrive.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -18,35 +22,38 @@ import java.util.UUID;
 public class AlunoService {
 
     private final AlunoRepository alunoRepository;
+    private final AlunoMapper mapper;
 
     @Transactional
-    public void criarAluno( Aluno aluno ) {
+    public void criarAluno( AlunoRequestDTO alunoDTO ) {
 
         log.info( "Requisicao criarAluno solicitada as {}", LocalTime.now( ) );
 
-        String matriculaGerada = UUID.randomUUID( ).toString( )
-                        .replace("-", "")
-                        .substring(0,11)
-                        .toUpperCase();
+        Aluno alunoEntity = mapper.toEntity( alunoDTO );
 
-        aluno.setMatricula( matriculaGerada );
+        String matriculaGerada = UUID.randomUUID().toString()
+                .replace("-", "")
+                .substring( 0, 11 )
+                .toUpperCase( );
 
-        alunoRepository.save( aluno );
+        alunoEntity.setMatricula( matriculaGerada );
 
-        log.info( "Requisicao criarAluno feita! as {}. {}", LocalTime.now( ), aluno );
+
+        alunoRepository.save( alunoEntity );
+
+        log.info( "Requisicao criarAluno feita! as {}. {}", LocalTime.now( ), alunoEntity );
     }
 
 
-    public Aluno findByMatricula( String matricula ) {
+    public Optional<AlunoResponseDTO> findByMatricula( String matricula ) {
 
-        return alunoRepository.findByMatricula( matricula )
-                .orElseThrow( ( ) -> new IllegalArgumentException( "Aluno com a matricula fornecida não foi encontrado!" ) );
+        return mapper.toOptionalDTO( alunoRepository.findByMatricula( matricula ) );
 
     }
 
-    public List<Aluno> findByCategoriaPretendida ( CategoriaPretendido categoria ) {
+    public List<AlunoResponseDTO> findByCategoriaPretendida( CategoriaPretendido categoria ) {
 
-        return alunoRepository.findByCategoriaPretendida( categoria );
+        return mapper.toListAluno( alunoRepository.findByCategoriaPretendida( categoria ) );
     }
 
 }
