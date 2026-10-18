@@ -6,8 +6,10 @@ import br.com.connectdrive.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -16,11 +18,18 @@ public class AlunoService {
 
     private final AlunoRepository alunoRepository;
 
+    @Transactional
     public void criarAluno( Aluno aluno ) {
 
         if ( aluno.getMatricula( ).trim( ).isBlank( )  ) {
             throw new RuntimeException( "Necessario criar usuario com matricula!!!" );
         }
+        String matriculaGerada = UUID.randomUUID( ).toString( )
+                        .replace("-", "")
+                        .substring(0,11)
+                        .toUpperCase();
+
+        aluno.setMatricula( matriculaGerada );
 
         alunoRepository.save( aluno );
     }
