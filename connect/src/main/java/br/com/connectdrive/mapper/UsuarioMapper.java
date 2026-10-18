@@ -1,6 +1,7 @@
 package br.com.connectdrive.mapper;
 
 import br.com.connectdrive.dto.req.UsuarioRequestDTO;
+import br.com.connectdrive.dto.resp.UsuarioResponseDTO;
 import br.com.connectdrive.entities.Usuario;
 import org.mapstruct.Mapper;
 
@@ -12,6 +13,6 @@ public interface UsuarioMapper {
 
     List<Usuario> toListUsuario( List<UsuarioRequestDTO> usuariosRequestDTOS );
 
-    Optional<Usuario> toUsuarioOptional( Optional<Usuario> usuarioEntity );
+    Optional<UsuarioResponseDTO> toResponse(Optional<Usuario> usuarioEntity );
 
 }
