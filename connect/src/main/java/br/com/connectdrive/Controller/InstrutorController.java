@@ -1,5 +1,6 @@
 package br.com.connectdrive.Controller;
 
+import br.com.connectdrive.Services.InstrutorService;
 import br.com.connectdrive.entities.Instrutor;
 import br.com.connectdrive.enums.Sexo;
 import br.com.connectdrive.repository.InstrutorRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/instrutor")
 public class InstrutorController {
 
+    private final InstrutorService service;
     private final InstrutorRepository instrutorRepository;
 
     @PostMapping
@@ -24,8 +26,7 @@ public class InstrutorController {
 
     @GetMapping("/cnh/{cnh}")
     public Instrutor findByNumCnh( @PathVariable String cnh ) {
-        return instrutorRepository.findByNumCnh( cnh )
-                .orElseThrow( ( ) -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Instrutor não encontrado para CNH inserida!" ) );
+        return service.findByNumCnh( cnh );
     }
 
     @GetMapping("/sexo/{sexo}")
