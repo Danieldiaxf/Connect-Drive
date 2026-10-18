@@ -11,8 +11,10 @@ import java.util.Optional;
 @Mapper( componentModel = "spring" )
 public interface UsuarioMapper {
 
-    List<Usuario> toListUsuario( List<UsuarioRequestDTO> usuariosRequestDTOS );
+    UsuarioResponseDTO toDTO( Usuario usuario );
 
-    Optional<UsuarioResponseDTO> toResponse(Optional<Usuario> usuarioEntity );
+    default Optional<UsuarioResponseDTO> toOptionalDTO( Optional<Usuario> usuarioOptional ) {
+        return usuarioOptional.map(this::toDTO);
+    }
 
 }
