@@ -26,7 +26,7 @@ public class InstrutorService {
             repository.save( instrutor );
         } catch (Exception e) {
 
-        throw new IllegalArgumentException("Erro ao tentar criar Usuario Instrutor");
+        throw new IllegalArgumentException( "Erro ao tentar criar Usuario Instrutor" );
     }
 
     }
@@ -40,7 +40,7 @@ public class InstrutorService {
     }
 
 
-    public List<Instrutor> findBySexo(Sexo sexo ) {
+    public List<Instrutor> findBySexo( Sexo sexo ) {
 
         return repository.findBySexo( sexo );
 
