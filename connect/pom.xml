@@ -35,8 +35,12 @@
         <url/>
     </scm>
 
+    <packaging>war</packaging>
+
+
+
     <properties>
-        <java.version>26</java.version>
+        <java.version>17</java.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
 
@@ -170,3 +174,4 @@
     </build>
 
 </project>
+
