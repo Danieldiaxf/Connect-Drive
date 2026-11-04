@@ -54,11 +54,23 @@ public abstract class Usuario {
     @Column(nullable = false, length = 20)
     private String telefone;
 
-    @Column(nullable = false, length = 100)
-    private String cidade;
+    @Column(nullable = false, length = 8)
+    private String CEP;
+
+    @Column(nullable = false)
+    private String rua;
+
+    @Column(nullable = false)
+    private String complemento;
+
+    @Column
+    private Long numero;
 
     @Column(nullable = false, length = 2)
     private String uf;
+
+    @Column(nullable = false, length = 100)
+    private String cidade;
 
     @Column(name = "foto_url", length = 500)
     private String fotoUrl;
