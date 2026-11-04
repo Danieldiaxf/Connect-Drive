@@ -7,6 +7,7 @@ import br.com.connectdrive.dto.req.InstrutorRequestDTO;
 import br.com.connectdrive.enums.CategoriaCNH;
 import br.com.connectdrive.enums.CategoriaPretendido;
 import br.com.connectdrive.enums.Sexo;
+import br.com.connectdrive.exceptions.ApiExceptionHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,13 +16,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,7 +46,7 @@ class CadastroUsuarioControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(
                 new AlunoController(alunoService),
                 new InstrutorController(instrutorService)
-        ).build();
+        ).setControllerAdvice(new ApiExceptionHandler()).build();
     }
 
     @Test
@@ -95,9 +101,46 @@ class CadastroUsuarioControllerTest {
         mockMvc.perform(post("/aluno")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.mensagem")
+                        .value("Requisição inválida."));
 
         verifyNoInteractions(alunoService, instrutorService);
+    }
+
+    @Test
+    void deveRetornarErroInternoSemExporDetalhesDaExcecao() throws Exception {
+        String json = """
+                {
+                    "nome": "Instrutor de Teste",
+                    "cpf": "52998224725",
+                    "dataNasc": "1990-05-20",
+                    "sexo": "MASCULINO",
+                    "email": "instrutor@example.com",
+                    "senha": "SenhaTeste123!",
+                    "telefone": "61999990000",
+                    "cidade": "Brasilia",
+                    "uf": "DF",
+                    "fotoUrl": null,
+                    "numCnh": "12345678901",
+                    "categoriaCnh": "B",
+                    "carro": "Fiat Argo",
+                    "placaCarro": "ABC1D23",
+                    "precoHora": 100.00,
+                    "bio": "Instrutor de direcao",
+                    "anosExperiencia": 5
+                }
+                """;
+        doThrow(new IllegalStateException("detalhe técnico secreto"))
+                .when(instrutorService).salvarInstrutor(any(InstrutorRequestDTO.class));
+
+        mockMvc.perform(post("/instrutor")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().json("""
+                        {"mensagem":"Erro interno do servidor."}
+                        """));
     }
 
     @Test
