@@ -1,44 +1,41 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Usuario;
-import br.com.connectdrive.repository.UsuarioRepository;
+import br.com.connectdrive.Services.UsuarioService;
+import br.com.connectdrive.dto.resp.UsuarioResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.UUID;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     @GetMapping("/{id}")
-    public Usuario findById( @PathVariable UUID id ) {
-        return usuarioRepository.findById( id )
-                .orElseThrow( () ->
-                        new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para id inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<UsuarioResponseDTO> findById( @PathVariable Long id ) {
+        return usuarioService.findById( id );
     }
 
     @GetMapping("/CPF/{cpf}")
-    public Usuario findByCpf( @PathVariable String cpf ) {
-        return usuarioRepository.findByCpf( cpf )
-                .orElseThrow( () ->
-                    new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para CPF inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<UsuarioResponseDTO> findByCpf( @PathVariable String cpf ) {
+        return usuarioService.findByCpf( cpf );
     }
 
     @GetMapping("/Email/{email}")
-    public Usuario findByEmail( @PathVariable String email ) {
-        return usuarioRepository.findByEmail( email )
-                .orElseThrow( () ->
-                        new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário não encontrado para Email inserido" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<UsuarioResponseDTO> findByEmail( @PathVariable String email ) {
+        return usuarioService.findByEmail( email );
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuarioById( @PathVariable UUID id ) {
-        usuarioRepository.deleteById( id );
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUsuarioById(@PathVariable Long id ) {
+        usuarioService.deleteById( id );
     }
 }

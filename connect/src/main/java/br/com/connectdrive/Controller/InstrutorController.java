@@ -1,42 +1,40 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Instrutor;
+import br.com.connectdrive.Services.InstrutorService;
+import br.com.connectdrive.dto.req.InstrutorRequestDTO;
+import br.com.connectdrive.dto.resp.InstrutorResponseDTO;
 import br.com.connectdrive.enums.Sexo;
-import br.com.connectdrive.repository.InstrutorRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/instrutor")
 public class InstrutorController {
 
-    private final InstrutorRepository instrutorRepository;
+    private final InstrutorService service;
 
     @PostMapping
-    public void salvarInstrutor( @RequestBody Instrutor instrutor ){
-        instrutorRepository.save( instrutor );
+    public void salvarInstrutor( @RequestBody InstrutorRequestDTO instrutor ){
+        service.salvarInstrutor( instrutor );
     }
 
     @GetMapping("/cnh/{cnh}")
-    public Instrutor findByNumCnh( @PathVariable String cnh ) {
-        return instrutorRepository.findByNumCnh( cnh )
-                .orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Instrutor não encontrado para CNH inserida!" ) );
+    public Optional<InstrutorResponseDTO> findByNumCnh( @PathVariable String cnh ) {
+        return service.findByNumCnh( cnh );
     }
 
     @GetMapping("/sexo/{sexo}")
-    public List<Instrutor> findBySexo( @PathVariable Sexo sexo ) {
-        return instrutorRepository.findBySexo( sexo );
+    public List<InstrutorResponseDTO> findBySexo( @PathVariable Sexo sexo ) {
+        return service.findBySexo( sexo );
     }
 
     @GetMapping("/nota/{nota}")
-    public List<Instrutor> findByNotaMedia( @PathVariable Double nota ) {
-        return instrutorRepository.findByNotaMedia( nota );
+    public List<InstrutorResponseDTO> findByNotaMedia( @PathVariable Double nota ) {
+        return service.findByNotaMedia( nota );
     }
 
 }

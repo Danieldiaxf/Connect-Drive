@@ -1,14 +1,15 @@
 package br.com.connectdrive.Controller;
 
-import br.com.connectdrive.entity.Aluno;
+import br.com.connectdrive.Services.AlunoService;
+import br.com.connectdrive.dto.req.AlunoRequestDTO;
+import br.com.connectdrive.dto.resp.AlunoResponseDTO;
 import br.com.connectdrive.enums.CategoriaPretendido;
-import br.com.connectdrive.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/aluno")
@@ -16,22 +17,24 @@ import java.util.List;
 public class AlunoController {
 
 
-    private final AlunoRepository alunoRepository;
+    private final AlunoService alunoService;
 
     @PostMapping()
-    public void criarAluno( @RequestBody Aluno aluno ) {
-        alunoRepository.save( aluno );
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void criarAluno( @RequestBody AlunoRequestDTO alunoDTO ) {
+        alunoService.criarAluno( alunoDTO );
     }
 
     @GetMapping("/matricula/{matricula}")
-    public Aluno findByMatricula( @PathVariable String matricula ) {
-        return alunoRepository.findByMatricula( matricula )
-                .orElseThrow( ( ) -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Aluno não encontrado para matrícula inserida!" ) );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Optional<AlunoResponseDTO> findByMatricula(@PathVariable String matricula ) {
+        return alunoService.findByMatricula( matricula );
     }
 
     @GetMapping("/categoria/{categoria}")
-    public List<Aluno> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoria ) {
-        return alunoRepository.findByCategoriaPretendida( categoria );
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<AlunoResponseDTO> findByCategoriaPretendida( @PathVariable CategoriaPretendido categoria ) {
+        return alunoService.findByCategoriaPretendida( categoria );
     }
 }
     
