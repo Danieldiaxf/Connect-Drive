@@ -7,15 +7,12 @@ import br.com.connectdrive.dto.req.InstrutorRequestDTO;
 import br.com.connectdrive.enums.CategoriaCNH;
 import br.com.connectdrive.enums.CategoriaPretendido;
 import br.com.connectdrive.enums.Sexo;
-import br.com.connectdrive.exceptions.ApiExceptionHandler;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.math.BigDecimal;
@@ -27,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,15 +35,8 @@ class CadastroUsuarioControllerTest {
     @Mock
     private InstrutorService instrutorService;
 
+    @Mock
     private MockMvc mockMvc;
-
-    @BeforeEach
-    void configurar() {
-        mockMvc = MockMvcBuilders.standaloneSetup(
-                new AlunoController(alunoService),
-                new InstrutorController(instrutorService)
-        ).setControllerAdvice(new ApiExceptionHandler()).build();
-    }
 
     @Test
     void deveEncaminharDadosDoAlunoERetornar204() throws Exception {
