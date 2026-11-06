@@ -50,11 +50,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ vars.DOCKER_USERNAME }}/minha-app:v1 .
+          docker build -t ${{ vars.DOCKER_USERNAME }}/connect-drive:v1 .
 
       - name: Push Docker Image
         run: |
-          docker push ${{ vars.DOCKER_USERNAME }}/minha-app:v1
+          docker push ${{ vars.DOCKER_USERNAME }}/connect-drive:v1
 
       # Ajustado o path para encontrar o jar gerado dentro da subpasta 'connect'
       - name: Upload do artefato gerado
