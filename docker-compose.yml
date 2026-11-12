@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: connectdrive
       POSTGRES_PASSWORD: connectdrive
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - connect-drive-postgres-data:/var/lib/postgresql
     healthcheck:
@@ -30,7 +30,7 @@ services:
       SPRING_DATASOURCE_USERNAME: connectdrive
       SPRING_DATASOURCE_PASSWORD: connectdrive
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_H2_CONSOLE_ENABLED: "false"
     ports:
