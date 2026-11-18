@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Connect Drive",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "connectdrive",
+      "Username": "connectdrive",
+      "SSLMode": "prefer"
+    }
+  }
+}
